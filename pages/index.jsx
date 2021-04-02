@@ -3,18 +3,48 @@ import Head from 'next/head';
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 import {
   Heading,
+  Input,
+  Stack,
+  IconButton,
   Box,
   Flex,
-  Input,
-  IconButton,
   useToast,
 } from '@chakra-ui/react';
+import { SearchIcon, CloseIcon } from '@chakra-ui/icons';
 import Characters from '../components/Characters';
 import styles from '../styles/Home.module.css';
 
 export default function Home(results) {
   const initialState = results;
   const [characters, setCharacters] = useState(initialState.characters);
+  const [search, setSearch] = useState('');
+  const toast = useToast();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const results = await fetch('/api/SearchCharacters', {
+      method: 'post',
+      body: search,
+    });
+    const { characters, error } = await results.json();
+    if (error) {
+      toast({
+        position: 'bottom',
+        title: 'An error occurred.',
+        description: error,
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+    } else {
+      setCharacters(characters);
+    }
+  };
+
+  const handleResetButton = async () => {
+    setSearch('');
+    setCharacters(initialState.characters);
+  };
 
   return (
     <Flex direction="column" justify="center" align="center">
@@ -27,6 +57,30 @@ export default function Home(results) {
         <Heading as="h1" size="2xl " mb={8}>
           Rick and Morty
         </Heading>
+        <form onSubmit={handleSubmit}>
+          <Stack maxW="350px" w="100%" isInline mb={8}>
+            <Input
+              placeholder="Search"
+              value={search}
+              border="none"
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <IconButton
+              colorScheme="blue"
+              aria-label="Search database"
+              icon={<SearchIcon />}
+              disabled={search === ''}
+              type="submit"
+            />
+            <IconButton
+              colorScheme="red"
+              aria-label="Reset "
+              icon={<CloseIcon />}
+              disabled={search === ''}
+              onClick={handleResetButton}
+            />
+          </Stack>
+        </form>
         <Characters characters={characters} />
       </Box>
 
