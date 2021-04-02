@@ -54,7 +54,7 @@ export default function Home(results) {
       </Head>
 
       <Box mb={4} flexDirection="column" align="center" justify="center" py={8}>
-        <Heading as="h1" size="2xl " mb={8}>
+        <Heading as="h1" size="2xl" mb={8}>
           Rick and Morty
         </Heading>
         <form onSubmit={handleSubmit}>
