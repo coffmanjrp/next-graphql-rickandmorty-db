@@ -1,6 +1,6 @@
 import { Heading, Text, SimpleGrid, Flex, Image } from '@chakra-ui/react';
 
-function Characters({ characters }) {
+function CharacterCards({ characters }) {
   return (
     <SimpleGrid columns={[1, 2, 3]} spacing="40px">
       {characters.map((character) => (
@@ -26,4 +26,4 @@ function Characters({ characters }) {
   );
 }
 
-export default Characters;
+export default CharacterCards;
