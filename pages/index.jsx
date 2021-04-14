@@ -50,11 +50,17 @@ function Home(results) {
   return (
     <Flex direction="column" justify="center" align="center">
       <Head>
-        <title>Create Next App</title>
+        <title>Rick and Morty DB</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Box mb={4} flexDirection="column" align="center" justify="center" py={8}>
+      <Flex
+        mb={4}
+        flexDirection="column"
+        align="center"
+        justify="center"
+        py={8}
+      >
         <Heading as="h1" size="2xl" mb={8}>
           Rick and Morty
         </Heading>
@@ -83,7 +89,7 @@ function Home(results) {
           </Stack>
         </form>
         <CharacterCards characters={characters} />
-      </Box>
+      </Flex>
 
       <Flex
         as="footer"
