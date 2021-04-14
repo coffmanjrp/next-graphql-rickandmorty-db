@@ -13,9 +13,9 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { SearchIcon, CloseIcon } from '@chakra-ui/icons';
-import Characters from '../components/Characters';
+import CharacterCards from '../components/CharacterCards';
 
-export default function Home(results) {
+function Home(results) {
   const initialState = results;
   const [characters, setCharacters] = useState(initialState.characters);
   const [search, setSearch] = useState('');
@@ -82,7 +82,7 @@ export default function Home(results) {
             />
           </Stack>
         </form>
-        <Characters characters={characters} />
+        <CharacterCards characters={characters} />
       </Box>
 
       <Flex
@@ -122,23 +122,18 @@ export async function getStaticProps() {
           info {
             count
             pages
+            next
+            prev
           }
           results {
             name
             id
+            image
             location {
               name
-              id
             }
-            image
             origin {
               name
-              id
-            }
-            episode {
-              id
-              episode
-              air_date
             }
           }
         }
@@ -152,3 +147,5 @@ export async function getStaticProps() {
     },
   };
 }
+
+export default Home;
