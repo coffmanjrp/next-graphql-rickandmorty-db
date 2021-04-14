@@ -5,10 +5,13 @@ function CharacterCards({ characters }) {
   return (
     <SimpleGrid columns={[1, 2, 3]} spacing="40px">
       {characters.map((character) => (
-        <NextLink href={`/character/${character.id}`} passHref>
+        <NextLink
+          key={character.id}
+          href={`/character/${character.id}`}
+          passHref
+        >
           <Link>
             <Flex
-              key={character.id}
               justify="center"
               flexDirection="column"
               p="1.5rem"
