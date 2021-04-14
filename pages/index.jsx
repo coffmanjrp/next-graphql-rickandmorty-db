@@ -8,11 +8,12 @@ import {
   IconButton,
   Box,
   Flex,
+  Link,
+  Image,
   useToast,
 } from '@chakra-ui/react';
 import { SearchIcon, CloseIcon } from '@chakra-ui/icons';
 import Characters from '../components/Characters';
-import styles from '../styles/Home.module.css';
 
 export default function Home(results) {
   const initialState = results;
@@ -84,16 +85,26 @@ export default function Home(results) {
         <Characters characters={characters} />
       </Box>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+      <Flex
+        as="footer"
+        justify="center"
+        align="center"
+        w="100%"
+        h="100px"
+        borderTop="1px solid #eaeaea"
+      >
+        <Link
+          href="https://vercel.com?utm_source=create-next-app&amp;utm_medium=default-template&amp;utm_campaign=create-next-app"
           target="_blank"
           rel="noopener noreferrer"
+          d="flex"
+          justify="center"
+          align="center"
         >
           Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
+          <Image src="/vercel.svg" alt="Vercel Logo" ml="0.5rem" h="25px" />
+        </Link>
+      </Flex>
     </Flex>
   );
 }
