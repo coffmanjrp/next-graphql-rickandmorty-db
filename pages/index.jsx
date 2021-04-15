@@ -6,13 +6,13 @@ import {
   Input,
   Stack,
   IconButton,
-  Box,
   Flex,
   Link,
   Image,
   useToast,
 } from '@chakra-ui/react';
 import { SearchIcon, CloseIcon } from '@chakra-ui/icons';
+import { motion } from 'framer-motion';
 import CharacterCards from '../components/CharacterCards';
 
 function Home(results) {
@@ -61,15 +61,35 @@ function Home(results) {
         justify="center"
         py={8}
       >
-        <Heading as="h1" size="2xl" mb={8}>
-          Rick and Morty
-        </Heading>
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: {
+              scale: 0.8,
+              opacity: 0,
+            },
+            visible: {
+              scale: 1,
+              opacity: 1,
+              transition: {
+                delay: 0.4,
+              },
+            },
+          }}
+        >
+          <Heading as="h1" size="2xl" mb={8}>
+            Rick and Morty DB
+          </Heading>
+        </motion.div>
+
         <form onSubmit={handleSubmit}>
           <Stack maxW="350px" w="100%" isInline mb={8}>
             <Input
               placeholder="Search"
               value={search}
               border="none"
+              backgroundColor="gray.100"
               onChange={(e) => setSearch(e.target.value)}
             />
             <IconButton
